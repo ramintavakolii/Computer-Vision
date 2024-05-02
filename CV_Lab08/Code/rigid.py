@@ -1,22 +1,24 @@
 import cv2
 import numpy as np
 
-I = cv2.imread('karimi.jpg',0)
+I = cv2.imread('./Code/Images/karimi.jpg', 0)
 
-tx = 0
-ty = 0
+tx = 20
+ty = 30
 
-th =  20 # angle of rotation (degrees)
-th *= np.pi / 180 # convert to radians
+th = 2  # angle of rotation (degrees)
+th *= np.pi / 180  # convert to radians
 
-M = np.array([[np.cos(th),-np.sin(th),tx],
-              [np.sin(th), np.cos(th),ty]])
+M = np.array([[np.cos(th), -np.sin(th), tx],
+              [np.sin(th), np.cos(th), ty]])
 
-J = cv2.warpAffine(I,M, (I.shape[1], I.shape[0]) )
+# output image size
+output_size = (I.shape[1]+200, I.shape[0]+200)
 
-cv2.imshow('I',I)
+J = cv2.warpAffine(I, M, output_size)
+
+cv2.imshow('I', I)
 cv2.waitKey(0)
 
-cv2.imshow('J',J)
+cv2.imshow('J', J)
 cv2.waitKey(0)
-
